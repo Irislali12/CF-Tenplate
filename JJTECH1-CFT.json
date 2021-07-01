@@ -1,0 +1,46 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "",
+    "Metadata": {
+
+    },
+    "Parameters": {
+      "VPCCIDR": {
+          "Description": "CidrBlock for vpc",
+          "Type": "String"
+      }
+
+    },
+    "Mappings": {
+
+    },
+    "Conditions": {
+
+    },
+    "Resources": {
+      "jjtechVPC": {
+        "Type": "AWS::EC2::VPC",
+        "Properties": {
+          "CidrBlock": { "Ref": "VPCCIDR" },
+          "Tags": [{ "Key": "Name", "Value":  "jjtechVPC" }]
+        }
+      },
+      "jjtechIGW": {
+        "Type": "AWS::EC2::InternetGateway",
+        "Properties": {
+          "Tags": [{ "Key": "Name", "Value":  "jjtechIGW" }]
+        }
+      },
+      "AttachGateway": {
+        "Type": "AWS::EC2::VPCGatewayAttachment",
+        "Properties": {
+          "VpcId": { "Ref": "jjtechVPC" }
+          "InternetGatewayId": { "Ref": "jjtechIGW" }
+        }
+      }
+
+    },
+    "Outputs": {
+
+    }
+}
